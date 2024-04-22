@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import DetailPage from './pages/DetailPage';
 import CartPage from './pages/CartPage';
 import LoginPage from './pages/LoginPage';
-import ResisterPage from './pages/ResisterPage';
+import RegisterPage from './pages/ResisterPage';
 import OrderPage from './pages/OrderPage';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -17,7 +17,7 @@ function App() {
 					<Route path="product/:id" element={<DetailPage />} />
 					<Route path="cart" element={<CartPage />} />
 					<Route path="login" element={<LoginPage />} />
-					<Route path="resister" element={<ResisterPage />} />
+					<Route path="register" element={<RegisterPage />} />
 					<Route path="order" element={<OrderPage />} />
 					<Route path="*" element={<NotFoundPage />} />
 				</Route>
