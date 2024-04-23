@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Form from '../../../components/form/Form';
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import app from '../../../firebase';
+import { setUser } from '../../../store/user/user.slice';
 
 const SignIn = () => {
 	const navigate = useNavigate();
 	const [firebaseError, setFirebaseError] = useState('');
+	const dispatch = useDispatch();
 
 	const auth = getAuth(app);
 	const handleLogin = (email, password) => {
 		signInWithEmailAndPassword(auth, email, password)
-			.then((user) => {
-				// 리덕스 스토어에 담는 로직
+			.then((userCredential) => {
+				dispatch(
+					setUser({
+						email: userCredential.user.email,
+						token: userCredential.user.refreshToken,
+						id: userCredential.user.uid,
+					})
+				);
 
 				navigate('/');
 			})
