@@ -3,9 +3,16 @@ import axios from 'axios';
 
 export const fetchProducts = createAsyncThunk(
 	'products/fetchProducts', // Action type의 이름 수정
-	async (thunkAPI) => {
+	async (category, thunkAPI) => {
 		try {
-			const response = await axios.get(`https://fakestoreapi.com/products`);
+			let response;
+			if (category) {
+				response = await axios.get(
+					`https://fakestoreapi.com/products/category/${category}`
+				);
+			} else {
+				response = await axios.get(`https://fakestoreapi.com/products`);
+			}
 
 			return response.data;
 		} catch (error) {
