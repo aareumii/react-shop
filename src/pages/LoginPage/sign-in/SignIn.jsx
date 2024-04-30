@@ -5,6 +5,7 @@ import Form from '../../../components/form/Form';
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import app from '../../../firebase';
 import { setUser } from '../../../store/user/user.slice';
+import { setUserId } from '../../../store/cart/cart.slice';
 
 const SignIn = () => {
 	const navigate = useNavigate();
@@ -12,6 +13,7 @@ const SignIn = () => {
 	const dispatch = useDispatch();
 
 	const auth = getAuth(app);
+
 	const handleLogin = (email, password) => {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
@@ -22,7 +24,7 @@ const SignIn = () => {
 						id: userCredential.user.uid,
 					})
 				);
-
+				dispatch(setUserId(userCredential.user.uid));
 				navigate('/');
 			})
 			.catch((error) => {

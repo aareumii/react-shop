@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import app from '../../../firebase';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../store/user/user.slice';
+import { setUserId } from '../../../store/cart/cart.slice';
 
 const SignUp = () => {
 	const navigate = useNavigate();
@@ -12,6 +13,7 @@ const SignUp = () => {
 
 	const dispatch = useDispatch();
 	const auth = getAuth(app);
+
 	const handleSignupAndLogin = (email, password) => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
@@ -22,10 +24,11 @@ const SignUp = () => {
 						id: userCredential.user.uid,
 					})
 				);
-
+				dispatch(setUserId(userCredential.user.uid));
 				navigate('/');
 			})
 			.catch((error) => {
+				console.log(error);
 				return (
 					error && setFirebaseError('이메일 또는 비밀번호가 잘못되었습니다.')
 				);

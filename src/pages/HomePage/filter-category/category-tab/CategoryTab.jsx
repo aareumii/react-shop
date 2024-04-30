@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 const CategoryTab = ({ text, categoryName }) => {
 	const dispatch = useAppDispatch();
 	const category = useAppSelector((state) => state.categoriesSlice);
-	console.log(category);
 
 	const getActiveCategory = () => {
 		dispatch(setActiveCategory(categoryName));
