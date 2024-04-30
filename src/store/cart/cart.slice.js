@@ -1,4 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const postOrder = createAsyncThunk(
+	'cart/postOrder',
+	async (order, thunkAPI) => {
+		try {
+			await axios.post(
+				'https://6630a123c92f351c03da83e1.mockapi.io/orders',
+				order
+			);
+
+			thunkAPI.dispatch(sendOrder());
+		} catch (error) {
+			return thunkAPI.rejectWithValue('Error sending order');
+		}
+	}
+);
 
 const initialState = {
 	products: localStorage.getItem('cartProducts')
