@@ -7,10 +7,9 @@ import typescript from '@rollup/plugin-typescript';
 import scss from 'rollup-plugin-scss';
 import path from 'path';
 import { defineConfig } from 'rollup';
-import { fileURLToPath } from 'url';
+import url from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export default defineConfig({
 	input: 'src/index.tsx',
