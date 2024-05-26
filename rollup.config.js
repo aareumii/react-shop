@@ -7,9 +7,10 @@ import typescript from '@rollup/plugin-typescript';
 import scss from 'rollup-plugin-scss';
 import path from 'path';
 import { defineConfig } from 'rollup';
-import url from 'url';
+import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
 	input: 'src/index.tsx',
@@ -28,6 +29,7 @@ export default defineConfig({
 				path.resolve(__dirname, 'src/components'),
 				path.resolve(__dirname, 'node_modules'),
 			],
+			// eslint-disable-next-line no-undef
 			sass: require('sass'),
 		}),
 		postcss({
