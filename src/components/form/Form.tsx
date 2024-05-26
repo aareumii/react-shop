@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import styles from './Form.module.scss';
+
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+
+import styles from './Form.module.scss';
 
 type FormProps = {
 	title: string;
